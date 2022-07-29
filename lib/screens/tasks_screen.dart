@@ -5,7 +5,7 @@ class TasksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Colors.lime[600],
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -16,13 +16,14 @@ class TasksScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(30.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
                       radius: screenHeight * 0.08,
                       backgroundColor: Colors.white,
                       child: Icon(
                         Icons.list,
-                        color: Colors.lightBlue,
+                        color: Colors.lime[600],
                         size: screenHeight * 0.08,
                       ),
                     ),
