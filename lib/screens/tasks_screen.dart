@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:todo_plus/widgets/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.width;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.lime[600],
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
       backgroundColor: Colors.lime[600],
       body: SafeArea(
         child: Column(
@@ -13,7 +22,7 @@ class TasksScreen extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Padding(
-                padding: const EdgeInsets.all(30.0),
+                padding: EdgeInsets.all(screenHeight * 0.1),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -59,6 +68,7 @@ class TasksScreen extends StatelessWidget {
                     topRight: Radius.circular(screenHeight * 0.05),
                   ),
                 ),
+                child: TasksList(screenHeight: screenHeight),
               ),
             ),
           ],
