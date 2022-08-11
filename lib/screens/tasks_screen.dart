@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_plus/components/add_task_bottom_sheet.dart';
 import 'package:todo_plus/widgets/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -6,8 +7,15 @@ class TasksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) => AddTaskBottomSheet(),
+              backgroundColor: Color(0xFF757575));
+        },
         backgroundColor: Colors.lime[600],
         child: Icon(
           Icons.add,
@@ -22,7 +30,7 @@ class TasksScreen extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Padding(
-                padding: EdgeInsets.all(screenHeight * 0.1),
+                padding: EdgeInsets.all(screenHeight * 0.08),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,

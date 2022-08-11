@@ -12,7 +12,8 @@ class TasksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.all(screenHeight * 0.1),
+      padding: EdgeInsets.symmetric(
+          vertical: screenHeight * 0.08, horizontal: screenHeight * 0.05),
       children: [
         TaskTile(),
         TaskTile(),
