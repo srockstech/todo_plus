@@ -13,7 +13,7 @@ class TasksList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       padding: EdgeInsets.symmetric(
-          vertical: screenHeight * 0.08, horizontal: screenHeight * 0.05),
+          vertical: screenHeight * 0.08, horizontal: screenHeight * 0.07),
       children: [
         TaskTile(),
         TaskTile(),
