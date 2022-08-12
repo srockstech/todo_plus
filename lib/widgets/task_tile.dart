@@ -24,6 +24,7 @@ class _TaskTileState extends State<TaskTile> {
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w600,
+            decoration: (checked == true) ? TextDecoration.lineThrough : null,
           ),
         ),
         horizontalTitleGap: screenHeight * 0,
@@ -31,10 +32,8 @@ class _TaskTileState extends State<TaskTile> {
             left: screenHeight * 0.01, right: screenHeight * 0.03),
         minLeadingWidth: screenHeight * 0.01,
         minVerticalPadding: screenHeight * 0.03,
-        leading: Checkbox(
-          value: checked,
-          fillColor: MaterialStateProperty.all(Colors.white),
-          checkColor: Colors.lime[600],
+        leading: TaskCheckbox(
+          checked: checked,
           onChanged: (newValue) {
             setState(() {
               checked = newValue;
@@ -42,6 +41,22 @@ class _TaskTileState extends State<TaskTile> {
           },
         ),
       ),
+    );
+  }
+}
+
+class TaskCheckbox extends StatelessWidget {
+  TaskCheckbox({this.checked, required this.onChanged});
+
+  final bool? checked;
+  final Function(bool?) onChanged;
+  @override
+  Widget build(BuildContext context) {
+    return Checkbox(
+      value: checked,
+      fillColor: MaterialStateProperty.all(Colors.white),
+      checkColor: Colors.lime[600],
+      onChanged: onChanged,
     );
   }
 }
