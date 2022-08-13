@@ -62,6 +62,7 @@ class AddTaskBottomSheet extends StatelessWidget {
                           Radius.circular(screenHeight * 0.05)),
                     ),
                   ),
+                  onChanged: (value) {},
                 ),
                 SizedBox(
                   height: screenHeight * 0.07,
