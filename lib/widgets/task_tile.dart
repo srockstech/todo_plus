@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 class TaskTile extends StatelessWidget {
-  final bool checked;
+  final bool? checked;
   final String taskName;
-  TaskTile({required this.taskName, required this.checked});
+  final Function(bool?) toggleChecked;
+  TaskTile(
+      {required this.taskName,
+      required this.checked,
+      required this.toggleChecked});
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +36,9 @@ class TaskTile extends StatelessWidget {
           value: checked,
           fillColor: MaterialStateProperty.all(Colors.white),
           checkColor: Colors.lime[600],
-          onChanged: (value) {},
+          onChanged: toggleChecked,
         ),
       ),
     );
   }
 }
-
-// onChanged: (newValue) {
-// setState(() {
-// checked = newValue;
-// });
-// },
