@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AddTaskBottomSheet extends StatelessWidget {
-  const AddTaskBottomSheet({Key? key}) : super(key: key);
+  final Function(String) addTaskCallback;
+  AddTaskBottomSheet(this.addTaskCallback);
 
   @override
   Widget build(BuildContext context) {
+    String newTaskName = '';
     final screenHeight = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Container(
@@ -62,13 +64,18 @@ class AddTaskBottomSheet extends StatelessWidget {
                           Radius.circular(screenHeight * 0.05)),
                     ),
                   ),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    newTaskName = value;
+                  },
                 ),
                 SizedBox(
                   height: screenHeight * 0.07,
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    addTaskCallback(newTaskName);
+                    Navigator.pop(context);
+                  },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
