@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_plus/components/add_task_bottom_sheet.dart';
-import 'package:todo_plus/models/task.dart';
+import 'package:todo_plus/data.dart';
 import 'package:todo_plus/widgets/tasks_list.dart';
 
 class TasksScreen extends StatefulWidget {
@@ -9,11 +10,7 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(taskName: 'Buy Milk'),
-    Task(taskName: 'Buy Eggs'),
-    Task(taskName: 'Buy Bread'),
-  ];
+  @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -23,11 +20,7 @@ class _TasksScreenState extends State<TasksScreen> {
           showModalBottomSheet(
             context: context,
             isScrollControlled: true,
-            builder: (context) => AddTaskBottomSheet((newTaskName) {
-              setState(() {
-                tasks.add(Task(taskName: newTaskName));
-              });
-            }),
+            builder: (context) => AddTaskBottomSheet(),
             backgroundColor: Color(0xFF757575),
           );
         },
@@ -71,7 +64,7 @@ class _TasksScreenState extends State<TasksScreen> {
                       ),
                     ),
                     Text(
-                      '${tasks.length} Tasks',
+                      '${Provider.of<Data>(context).taskCount} Tasks',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: screenHeight * 0.04,
@@ -91,7 +84,7 @@ class _TasksScreenState extends State<TasksScreen> {
                     topRight: Radius.circular(screenHeight * 0.05),
                   ),
                 ),
-                child: TasksList(screenHeight: screenHeight, tasks: tasks),
+                child: TasksList(screenHeight: screenHeight),
               ),
             ),
           ],

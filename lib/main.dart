@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_plus/data.dart';
 import 'package:todo_plus/screens/tasks_screen.dart';
 
 void main() {
@@ -8,12 +10,15 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        accentColor: Colors.lime[600],
+    return ChangeNotifierProvider(
+      create: (context) => Data(),
+      child: MaterialApp(
+        theme: ThemeData(
+          accentColor: Colors.lime[600],
+        ),
+        debugShowCheckedModeBanner: false,
+        home: TasksScreen(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: TasksScreen(),
     );
   }
 }

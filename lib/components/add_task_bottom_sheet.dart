@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_plus/data.dart';
 import 'package:todo_plus/design.dart';
 
 class AddTaskBottomSheet extends StatelessWidget {
-  final Function(String) addTaskCallback;
-  AddTaskBottomSheet(this.addTaskCallback);
+  AddTaskBottomSheet();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class AddTaskBottomSheet extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    addTaskCallback(newTaskName);
+                    Provider.of<Data>(context).addTask(newTaskName);
                     Navigator.pop(context);
                   },
                   style: ButtonStyle(
