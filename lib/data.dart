@@ -1,25 +1,36 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 import 'models/task.dart';
 
 class Data extends ChangeNotifier {
-  List<Task> tasks = [
+  List<Task> _tasks = [
     Task(taskName: 'Buy Milk'),
     Task(taskName: 'Buy Eggs'),
     Task(taskName: 'Buy Bread'),
   ];
 
-  void addTask(newTaskName) {
-    tasks.add(Task(taskName: newTaskName));
-    notifyListeners();
+  UnmodifiableListView<Task> get tasks {
+    return UnmodifiableListView(_tasks);
   }
 
   int get taskCount {
-    return tasks.length;
+    return _tasks.length;
+  }
+
+  void addTask(newTaskName) {
+    _tasks.add(Task(taskName: newTaskName));
+    notifyListeners();
   }
 
   void toggleChecked(value, index) {
-    tasks[index].isDone = value;
+    _tasks[index].isDone = value;
+    notifyListeners();
+  }
+
+  void deleteTask(index) {
+    _tasks.removeAt(index);
     notifyListeners();
   }
 }

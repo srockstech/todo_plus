@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
       create: (context) => Data(),
       child: MaterialApp(
         theme: ThemeData(
-          accentColor: Colors.lime[600],
+          accentColor: Colors.white,
+          androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
         ),
         debugShowCheckedModeBanner: false,
         home: TasksScreen(),
