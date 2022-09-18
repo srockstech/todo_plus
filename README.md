@@ -12,3 +12,6 @@ A beautiful app that helps in maintaining a todo checklist.
 - Adding multiple tasks
 - Marking tasks as completed
 - Deleting tasks
+
+## APK
+Download APK form releases section
