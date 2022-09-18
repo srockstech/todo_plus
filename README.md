@@ -2,7 +2,7 @@
 A beautiful app that helps in maintaining a todo checklist.
 
 ## Preview
-<img width="40%" src="https://github.com/srockstech/todo_plus/blob/main/assets/preview.gif">
+<img width="35%" src="https://github.com/srockstech/todo_plus/blob/main/assets/preview.gif">
 
 ## Flutter State Management Used
 - Provider
