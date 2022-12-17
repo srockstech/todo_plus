@@ -15,7 +15,7 @@ class TasksList extends StatefulWidget {
 class _TasksListState extends State<TasksList> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<Data>(
+    Consumer consumer = Consumer<Data>(
       builder: (context, taskData, child) {
         return ListView.builder(
           padding: EdgeInsets.symmetric(
@@ -32,5 +32,6 @@ class _TasksListState extends State<TasksList> {
         );
       },
     );
+    return consumer;
   }
 }

@@ -5,32 +5,36 @@ import 'package:flutter/material.dart';
 import 'models/task.dart';
 
 class Data extends ChangeNotifier {
-  List<Task> _tasks = [
-    Task(taskName: 'Buy Milk'),
-    Task(taskName: 'Buy Eggs'),
-    Task(taskName: 'Buy Bread'),
-  ];
+  List<Task> _tasksList = [];
+
+  Data(this._tasksList);
+
+  //constructor that converts json to object instance
+  Data.fromJSON(Map<String, dynamic> json) : _tasksList = json['tasks'];
+
+  //method that converts object to json string
+  Map<String, dynamic> toJson() => {'tasksList': _tasksList};
 
   UnmodifiableListView<Task> get tasks {
-    return UnmodifiableListView(_tasks);
+    return UnmodifiableListView(_tasksList);
   }
 
   int get taskCount {
-    return _tasks.length;
+    return _tasksList.length;
   }
 
-  void addTask(newTaskName) {
-    _tasks.add(Task(taskName: newTaskName));
+  void addTask(newTaskName) async {
+    _tasksList.add(Task(taskName: newTaskName));
     notifyListeners();
   }
 
   void toggleChecked(value, index) {
-    _tasks[index].isDone = value;
+    _tasksList[index].isDone = value;
     notifyListeners();
   }
 
   void deleteTask(index) {
-    _tasks.removeAt(index);
+    _tasksList.removeAt(index);
     notifyListeners();
   }
 }
