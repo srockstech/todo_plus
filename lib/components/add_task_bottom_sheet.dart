@@ -1,10 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_plus/data.dart';
 import 'package:todo_plus/design.dart';
+import 'package:todo_plus/user_preferences.dart';
 
 class AddTaskBottomSheet extends StatelessWidget {
   AddTaskBottomSheet();
+
+  void storeData(Map<String, dynamic> userData) async {
+    String data = jsonEncode(userData);
+    print(userData);
+    await UserPreferences.setData(data);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +64,9 @@ class AddTaskBottomSheet extends StatelessWidget {
                   onPressed: () {
                     Provider.of<Data>(context, listen: false)
                         .addTask(newTaskName);
+                    Map<String, dynamic> userData =
+                        Provider.of<Data>(context, listen: false).toMap();
+                    storeData(userData);
                     Navigator.pop(context);
                   },
                   style: ButtonStyle(

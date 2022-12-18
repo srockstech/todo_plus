@@ -24,20 +24,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Task> tasksList = [];
-
   Data? data;
 
   @override
   void initState() {
     super.initState();
-  }
+    List<Task> defaultTaskList = [Task(taskName: 'Go to gym', isDone: true)];
 
-  void storeData() {
-    data = Data(tasksList);
-    String userData = jsonEncode(data);
-    print(userData);
-    UserPreferences.setData(userData);
+    //_tasksList != null ? _tasksList.map((e) => e.toMap()).toList() : null
+
+    Data defaultUserData = Data(defaultTaskList);
+    Map<String, dynamic> defaultData = defaultUserData.toMap();
+    String encodedDefaultData = jsonEncode(defaultData);
+
+    String? userData = UserPreferences.getData() ?? encodedDefaultData;
+    Map<String, dynamic> userDataMap = jsonDecode(userData);
+    data = Data.fromMap(userDataMap);
   }
 
   @override

@@ -5,15 +5,23 @@ import 'package:flutter/material.dart';
 import 'models/task.dart';
 
 class Data extends ChangeNotifier {
-  List<Task> _tasksList = [];
+  List<Task> _tasksList = [
+    Task(taskName: 'Go to bed', isDone: true),
+  ];
 
   Data(this._tasksList);
 
   //constructor that converts json to object instance
-  Data.fromJSON(Map<String, dynamic> json) : _tasksList = json['tasks'];
+  Data.fromMap(Map<String, dynamic> map) {
+    _tasksList = map['tasksList'];
+  }
 
   //method that converts object to json string
-  Map<String, dynamic> toJson() => {'tasksList': _tasksList};
+  Map<String, dynamic> toMap() {
+    List<Map<String, dynamic>> tasksList =
+        _tasksList.map((e) => e.toMap()).toList();
+    return {'tasksList': tasksList};
+  }
 
   UnmodifiableListView<Task> get tasks {
     return UnmodifiableListView(_tasksList);
