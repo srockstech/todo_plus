@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_plus/data.dart';
+
+import '../user_preferences.dart';
 
 class TaskTile extends StatefulWidget {
   final bool? checked;
@@ -22,15 +26,17 @@ class TaskTile extends StatefulWidget {
 class _TaskTileState extends State<TaskTile> {
   bool showDelete = false;
 
+  void storeData(Map<String, dynamic> userData) async {
+    String data = jsonEncode(userData);
+    print(userData);
+    await UserPreferences.setData(data);
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.width;
     return Container(
       margin: EdgeInsets.only(bottom: screenHeight * 0.015),
-      // decoration: BoxDecoration(
-      //   color: Colors.lime[600],
-      //   borderRadius: BorderRadius.all(Radius.circular(screenHeight * 0.05)),
-      // ),
       child: TextButton(
         style: ButtonStyle(
           padding: MaterialStateProperty.all(EdgeInsets.zero),
@@ -70,6 +76,9 @@ class _TaskTileState extends State<TaskTile> {
             onChanged: (value) {
               Provider.of<Data>(context, listen: false)
                   .toggleChecked(value, widget.index);
+              Map<String, dynamic> userData =
+                  Provider.of<Data>(context, listen: false).toMap();
+              storeData(userData);
             },
           ),
           trailing: (showDelete == false)
@@ -79,6 +88,9 @@ class _TaskTileState extends State<TaskTile> {
                   onPressed: () {
                     Provider.of<Data>(context, listen: false)
                         .deleteTask(widget.index);
+                    Map<String, dynamic> userData =
+                        Provider.of<Data>(context, listen: false).toMap();
+                    storeData(userData);
                     showDelete = false;
                   },
                 ),

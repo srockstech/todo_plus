@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_plus/data.dart';
 import 'package:todo_plus/screens/tasks_screen.dart';
@@ -28,8 +29,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    super.initState();
-    List<Task> defaultTaskList = [Task(taskName: 'Go to gym', isDone: true)];
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    List<Task> defaultTaskList = [];
 
     //_tasksList != null ? _tasksList.map((e) => e.toMap()).toList() : null
 
@@ -39,7 +40,20 @@ class _MyAppState extends State<MyApp> {
 
     String? userData = UserPreferences.getData() ?? encodedDefaultData;
     Map<String, dynamic> userDataMap = jsonDecode(userData);
+
     data = Data.fromMap(userDataMap);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
 
   @override
