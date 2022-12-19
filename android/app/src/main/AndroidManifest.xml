@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tech.srocks.todo_plus">
    <application
-        android:label="todo_plus"
+        android:label="Todo+"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

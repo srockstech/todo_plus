@@ -11,7 +11,6 @@ class AddTaskBottomSheet extends StatelessWidget {
 
   void storeData(Map<String, dynamic> userData) async {
     String data = jsonEncode(userData);
-    print(userData);
     await UserPreferences.setData(data);
   }
 
